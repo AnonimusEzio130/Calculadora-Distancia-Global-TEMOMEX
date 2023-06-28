@@ -1,0 +1,65 @@
+<mat-toolbar color="primary">
+  <span>Prueba Desarrolladores</span>
+  <span class="example-spacer"></span>
+  <button mat-raised-button (click)="openAddEditEmpForm()">
+    Nueva Concretera
+  </button>
+  <button mat-raised-button (click)="openAddEditUserForm()">
+    Nuevo Usuario
+  </button>
+</mat-toolbar>
+
+<div class="main-body">
+
+  <mat-form-field>
+    <mat-label>Busqueda</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ej. Nombre" #input>
+  </mat-form-field>
+    <h1>Usuario</h1>
+
+    <!--Tabla contenedora de Usuario-->
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSourceUsuario" matSort>
+      <!-- Columna ID -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      </ng-container>
+      <br>
+      <!-- Progress Column -->
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+        <td mat-cell *matCellDef="let row"> {{row.nombre}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Latitude">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Latitud </th>
+        <td mat-cell *matCellDef="let row"> {{row.ubicacion.latitud}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Longitude">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Longitud </th>
+        <td mat-cell *matCellDef="let row"> {{row.ubicacion.longitud}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button color="warn" (click)="viewCementeras(row)">
+            <mat-icon>location_on</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="UsuariodisplayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: UsuariodisplayedColumns;"></tr>
+      
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No hay coincidencia para:  "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
+</div>

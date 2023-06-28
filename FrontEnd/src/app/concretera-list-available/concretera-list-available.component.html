@@ -1,0 +1,38 @@
+<div mat-dialog-title>
+    <h1>Agregar Concretera {{this.idUsuario}}</h1>
+    <h1>Concreteras</h1>
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSourceconcretera" matSort>
+      <!-- Columna ID -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      </ng-container>
+      <!-- Progress Column -->
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+        <td mat-cell *matCellDef="let row"> {{row.nombre}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Radius">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Radio </th>
+        <td mat-cell *matCellDef="let row"> {{row.radio}} Km</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Latitude">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Latitud </th>
+        <td mat-cell *matCellDef="let row"> {{row.ubicacion.latitud}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Longitude">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Longitud </th>
+        <td mat-cell *matCellDef="let row"> {{row.ubicacion.longitud}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="ConcreteradisplayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: ConcreteradisplayedColumns;"></tr>
+      
+    </table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5]" aria-label="Select page of users"></mat-paginator>
+</div>
